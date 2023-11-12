@@ -16,6 +16,7 @@ jobs:
       - name: Download and Extract MaxMind Database
         run: |
           wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${{ secrets.MAXMIND_LICENSE_KEY }}&suffix=tar.gz" -O GeoLite2-ASN.tar.gz
+          wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${{ secrets.MAXMIND_LICENSE_KEY }}&suffix=tar.gz.sha256" -O GeoLite2-ASN-sha256.txt
           wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${{ secrets.MAXMIND_LICENSE_KEY }}&suffix=tar.gz" -O GeoLite2-City.tar.gz
           wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${{ secrets.MAXMIND_LICENSE_KEY }}&suffix=tar.gz" -O GeoLite2-Country.tar.gz
           tar -xzf GeoLite2-ASN.tar.gz
