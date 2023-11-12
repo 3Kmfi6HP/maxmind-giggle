@@ -1,0 +1,32 @@
+name: Update MaxMind Database
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-maxmind:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Download and Extract MaxMind Database
+        run: |
+          wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${{ secrets.MAXMIND_LICENSE_KEY }}&suffix=tar.gz" -O GeoLite2-ASN.tar.gz
+          tar -xzf GeoLite2-ASN.tar.gz
+          mv GeoLite2-ASN*/GeoLite2-ASN.mmdb .
+          rm -rf GeoLite2-ASN*
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Downloaded file on $(date "+%Y/%m/%d %H:%M:%S")"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git
+          git push
