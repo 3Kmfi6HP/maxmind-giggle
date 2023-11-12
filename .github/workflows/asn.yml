@@ -13,11 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x" # 选择 Python 版本
-
       - name: Download and Extract MaxMind Database
         run: |
           pwd
@@ -25,6 +20,7 @@ jobs:
           wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-ASN&license_key=${{ secrets.MAXMIND_LICENSE_KEY }}&suffix=tar.gz" -O GeoLite2-ASN.tar.gz
           tar -xzf GeoLite2-ASN.tar.gz
           mv GeoLite2-ASN*/GeoLite2-ASN.mmdb .
+          rm -rf GeoLite2-ASN_*/*.txt GeoLite2-ASN.tar.gz
 
       - name: Commit and Push
         run: |
