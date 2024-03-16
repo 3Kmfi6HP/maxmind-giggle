@@ -1,1 +1,1 @@
-ba544c29d941cfead12be2f5225815ad7b9ab3fa0d921cdd566985af9a57bdd1  GeoLite2-ASN_20240308.tar.gz
+1dffe6c9e0f689519094cbcad4e034cc8ed5b92f1bf952f8346ee9c2a3748ad6  GeoLite2-ASN_20240315.tar.gz
